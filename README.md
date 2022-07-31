@@ -1,3 +1,33 @@
+
+## About This repo
+
+### With Much respect for the original creator [binhex](https://github.com/binhex). 
+
+This Repo was created out of necessity for a new armfv7 (raspberry pi) image.
+
+If you can run an x86 or an aarch64 image, please please please show love to the 
+[original creator](https://github.com/seanrclayton/armfv7-alpine-deluge-vpn)
+
+**ALL** of the code to make this image was transcribed for the pi, not written. 
+
+So none of this possible if binhex decides to stop maintaining his code. This was intended as one off for my home server.
+
+
+### Why/How was this made?
+
+I did try to create an arch image from scratch, like [this repo](doggosrocko/arch-delugevpn-armhf) - but the image was
+too large (3.6 gigs) and I figured there must be a way to make a smaller image. 
+
+Through a ton of trial and error I found the correct packages to install, and which shell scripts I needed to change to
+make this functional for deluge on a VPN with restricted ip tables.
+
+So that's it - in a nutshell. The lines I changed, I did try to comment, however I'm sure I forgot to comment a line or
+two. 
+
+> Tested in Kubernetes Only
+
+## Original README with my image substituted: 
+
 **Application**
 
 [Deluge](http://deluge-torrent.org/)  
@@ -47,7 +77,7 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<UID for user> \
     -e PGID=<GID for user> \
-    binhex/arch-delugevpn
+    seanrclayton/armfv7-alpine-deluge-vpn
 ```
 &nbsp;
 Please replace all user variables in the above command defined by <> with the correct values.
@@ -90,7 +120,7 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-    binhex/arch-delugevpn
+    seanrclayton/armfv7-alpine-deluge-vpn
 ```
 &nbsp;
 **AirVPN provider**
@@ -129,7 +159,7 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-    binhex/arch-delugevpn
+    seanrclayton/armfv7-alpine-deluge-vpn
 ```
 &nbsp;
 
@@ -183,3 +213,4 @@ If you appreciate my work, then please consider buying me a beer  :D
 [![PayPal donation](https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MM5E27UX6AUU4)
 
 [Documentation](https://github.com/binhex/documentation) | [Support forum](http://lime-technology.com/forum/index.php?topic=45812.0)
+
