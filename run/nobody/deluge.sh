@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/usr/bin/dumb-init /bin/bash
+
+if [ -z "$DELUGE_DAEMON_LOG_LEVEL" ]
+then
+  export DELUGE_DAEMON_LOG_LEVEL=$DELUGE_DAEMON_LOG_LEVEL
+  else
+    export DELUGE_DAEMON_LOG_LEVEL="INFO"
+fi
 
 if [[ "${deluge_running}" == "false" ]]; then
 
@@ -24,21 +31,21 @@ if [[ "${deluge_running}" == "false" ]]; then
 	fi
 
 	# run deluge daemon (daemonized, non-blocking)
-	/usr/bin/deluged -c /config -L "${DELUGE_DAEMON_LOG_LEVEL}" -l /config/deluged.log
+	/usr/bin/deluged -c /config -L INFO -l /config/deluged.log
 
 	# make sure process deluged DOES exist
 	retry_count=12
 	retry_wait=1
 	while true; do
 
-		if ! pgrep -fa "deluged" > /dev/null; then
+		if ! pgrep -x "deluged" > /dev/null; then
 
 			retry_count=$((retry_count-1))
 			if [ "${retry_count}" -eq "0" ]; then
 
 				echo "[warn] Wait for Deluge process to start aborted, too many retries"
 				echo "[info] Showing output from command before exit..."
-				timeout 10 /usr/bin/deluged -c /config -L "${DELUGE_DAEMON_LOG_LEVEL}" -l /config/deluged.log
+				timeout 10 /usr/bin/deluged -c /config -L INFO -l /config/deluged.log
 				cat /config/deluged.log ; return 1
 
 			else
@@ -98,7 +105,7 @@ if [[ "${deluge_web_running}" == "false" ]]; then
 	echo "[info] Starting Deluge Web UI..."
 
 	# run deluge-web
-	nohup /usr/bin/deluge-web -c /config -L "${DELUGE_WEB_LOG_LEVEL}" -l /config/deluge-web.log &
+	nohup /usr/bin/deluge-web -c /config -L INFO -l /config/deluge-web.log &
 	echo "[info] Deluge Web UI started"
 
 fi
