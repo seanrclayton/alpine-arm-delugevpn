@@ -6,7 +6,7 @@
 This Repo was created out of necessity for a new armfv7 (raspberry pi) image.
 
 If you can run an x86 or an aarch64 image, please please please show love to the 
-[original creator](https://github.com/seanrclayton/armfv7-alpine-deluge-vpn)
+[original creator](https://github.com/binhex/arch-delugevpn)
 
 **ALL** of the code to make this image was transcribed for the pi, not written. 
 
