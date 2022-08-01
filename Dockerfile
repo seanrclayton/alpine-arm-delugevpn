@@ -1,4 +1,5 @@
-FROM alpine:latest as builder
+#FROM alpine:latest as builder
+FROM alpine:3.15.5 as builder
 # additional files
 ##################
 
@@ -19,15 +20,6 @@ ADD run/root/*.sh /root/
 
 # add bash script to run privoxy
 ADD run/nobody/*.sh /home/nobody/
-
-# install app
-#############
-
-# make executable and run bash scripts to install app
-RUN chmod +x /root/*.sh /home/nobody/*.sh && \
-	/bin/bash /root/install.sh
-
-
 
 # docker settings
 #################
@@ -84,9 +76,9 @@ EXPOSE 58846
 EXPOSE 58946
 EXPOSE 58946/udp
 
-# set permissions
-#################
-ENTRYPOINT ["/sbin/tini", "-g", "--"]
+
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 
 # make executable and run bash scripts to install app
