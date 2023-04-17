@@ -3,7 +3,7 @@ FROM alpine:3.15.5 as builder
 # additional files
 ##################
 
-RUN apk add bash curl python3 py3-pip moreutils grep supervisor openvpn drill dumb-init tini
+RUN apk add bash curl python3 py3-pip moreutils grep supervisor openvpn drill dumb-init tini jq coreutils
 
 ADD build/supervisor.conf /etc/
 
